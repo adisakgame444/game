@@ -3,18 +3,20 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import { Kanit } from "next/font/google";
 
+
 export const metadata: Metadata = {
   title: {
-    default: "TK-Store | E-Commerce Workshop",
-    template: "%s | E-Commerce Workshop",
+    default: "TK-Store",
+    template: "%s",
   },
   description:
     "ร้านค้าออนไลน์สายเขียว พร้อมบริการจัดส่งเร็วและราคาที่คุ้มค่า!",
 };
 
 const kanit = Kanit({
-  subsets: ["latin"],
+  subsets: ["thai"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  
 });
 
 interface RootLayoutProps {

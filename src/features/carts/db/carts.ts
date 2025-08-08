@@ -123,6 +123,7 @@ const recalculateCartTotal = async (cartId: string) => {
 
 export const addToCart = async (input: AddToCartInput) => {
   const user = await authCheck();
+  console.log(user)
   if (!user || !canUpdateUserCart(user)) {
     redirect("/auth/signin");
   }

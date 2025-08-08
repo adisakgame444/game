@@ -76,7 +76,7 @@ const AdminOrderPage = async ({ searchParams }: AdminOrderPageProps) => {
           <CardTitle className="text-lg sm:text-xl">Orders</CardTitle>
 
           <Tabs defaultValue={status || "all"}>
-            <TabsList className="grid grid-cols-6">
+            <TabsList className="flex w-full overflow-x-auto whitespace-nowrap gap-2 pl-9">
               <TabsTrigger value="all" asChild>
                 <Link href="/admin/orders">All</Link>
               </TabsTrigger>

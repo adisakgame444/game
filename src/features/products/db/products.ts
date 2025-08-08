@@ -129,12 +129,12 @@ export const getFeatureProducts = async () => {
 
   try {
     const products = await db.product.findMany({
-      take: 8,
+      // take: 10,
       where: {
         status: "Active",
       },
       orderBy: {
-        sold: "desc",
+        createdAt: "desc"
       },
       include: {
         category: {

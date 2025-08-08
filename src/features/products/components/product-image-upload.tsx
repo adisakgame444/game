@@ -282,6 +282,7 @@ const ProductImageUpload = ({
         multiple
         accept="image/*"
         className="hidden"
+        aria-label="Upload product images"
         onChange={(event) => handleFileChange(event)}
       />
     </div>

@@ -134,11 +134,14 @@ const OrderDetail = ({ order }: OrderDetailProps) => {
               {order.trackingNumber && (
                 <div>
                   <h3 className="font-medium mb-1">หมายเลขพัสดุ:</h3>
-                  <p className="font-medium text-primary">
-                    {order.trackingNumber}
+                  <p className="text-medium text-primary">
+                   {order.trackingNumber}
                   </p>
                 </div>
               )}
+
+
+
             </div>
           </CardContent>
         </Card>

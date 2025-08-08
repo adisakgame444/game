@@ -1,12 +1,13 @@
 import Modal from "@/components/shared/modal"
 import { Badge } from "@/components/ui/badge"
-import { Card } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ProductType } from "@/types/product"
 import dayjs from "@/lib/dayjs"
-import { Clock, ShoppingCart, Tag } from "lucide-react"
+import { Clock, ImageIcon, ShoppingCart, Tag } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 
 interface ProductsDetailModal {
@@ -91,7 +92,37 @@ const ProductsDetailModal = ({ open, onOpenChange ,product }: ProductsDetailModa
                 </div>
               </Card>
             </TabsContent>
-            <TabsContent value="image">image</TabsContent>
+            <TabsContent value="image">
+              <ScrollArea className="max-h-[500px] overflow-y-auto">
+                <Card>
+                  <CardContent>
+                    <h3 className="text-sm font-semibold mb-3">
+                      รูปภาพของสินค้า ({product.images.length})
+                    </h3>
+
+                    {product.images.length > 0 ? (
+                      <div className=" grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {product.images.map((image, index) => (
+                          <div key={index} className=" relative aspect-square border-[10px] rounded-md overflow-hidden cursor-pointer">
+                            <Image 
+                              alt={`Product image ${index + 1 }`}
+                              src={image.url}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center py-10 bg-muted/50 rounded-md">
+                        <ImageIcon size={40} className="text-muted-foreground mb-2 opacity-40"/>
+                        <p className="text-sm text-muted-foreground">ไม่มีรูปภาพของสินค้า</p> 
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </ScrollArea>
+            </TabsContent>
           </Tabs>
         </div>
     </Modal>

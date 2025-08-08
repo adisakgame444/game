@@ -1,59 +1,72 @@
 'use server'
 
-// import { Button } from "@/components/ui/button";
 import { getFeatureProducts } from "@/features/products/db/products";
-import { ArrowRight, BadgeCheck } from "lucide-react";
-// import Link from "next/link";
-// import ProductCard from "../products/product-card";
+import { ArrowRight, BadgeCheck, Megaphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ProductSearch from "./productSearch";
 
+
+
 const FeatureProducts = async () => {
- 
+
   const products = await getFeatureProducts();
  
   return (
     <section className="container mx-auto px-4 py-1">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-5 gap-4">
-        <div>
-          <div className="flex mb-3 items-center gap-2 px-5 py-2 bg-green-100 text-green-800 border border-green-300 rounded-full shadow-sm">
-            <BadgeCheck size={16} className="text-green-500" />
-            <span className="text-sm font-medium">สินค้าดี ราคาถูก ส่งรวดเร็ว</span>
+      <div className="flex flex-wrap justify-between items-center mb-1">
+        <div className="flex items-center gap-2 px-2 py-1 bg-gradient-to-r from-green-100 to-green-50 text-green-800 rounded-2xl shadow-md w-fit border border-green-200">
+          <div className="bg-green-500 p-1 rounded-full">
+            <BadgeCheck size={20} className="text-white" />
           </div>
-
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 relative inline-block after:block after:h-1 after:bg-green-400 after:w-12 after:mt-1">
-            สินค้าทั้งหมด
-          </h2>
-
+          <span className="text-sm font-semibold">
+            สินค้าดี ราคาถูก ส่งรวดเร็ว
+          </span>
         </div>
 
-        <Button variant="ghost" className="group px-4 py-2 rounded-full bg-gradient-to-r from-green-400 to-green-600 text-white hover:from-green-500 hover:to-green-700 transition">
-          <Link href="/cart" className="flex items-center gap-2">
-          <span className="text-sm font-medium">ดูสินค้าในตะกร้า</span>
-          <ArrowRight
-            size={16}
-            className="transition-transform group-hover:translate-x-1"
-          />
-          </Link>
-        </Button>
+
+
+
+        {/* Section: Title + Cart Button */}
+        <div className="flex items-center justify-between w-full mt-4 mb-2">
+            <h3 className="text-2xl md:text-3xl font-extrabold text-gray-800 flex items-center gap-2">
+              <span className="inline-block w-1.5 h-8 bg-green-500 rounded-sm"></span>
+              สินค้าทั้งหมด
+            </h3>
+
+
+            <Button
+             variant="ghost"
+             className="group px-4 py-2 rounded-full bg-gradient-to-r from-green-400 to-green-500 text-white text-xs font-medium whitespace-nowrap"
+             >
+              <Link href="/cart" className="flex items-center gap-2">
+                <span>ดูสินค้าในตะกร้า</span>
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+        </div>
 
       </div>
       
-      <div className="marquee-container">
-        <div className="marquee-text">
-          🎉 พบกับสินค้าใหม่ๆ ทุกสัปดาห์ พร้อมโปรโมชั่นสุดพิเศษ! 🎉 พบกับสินค้าใหม่ๆ ทุกสัปดาห์ พร้อมโปรโมชั่นสุดพิเศษ! 🥦🥦🥦🥦🥦
+      <div className="marquee-container flex items-center gap-2">
+        {/* กล่องประกาศ */}
+        <div className="flex items-center gap-2 rounded-[5px] bg-yellow-100 text-yellow-900 px-3 py-1 shadow-sm w-max">
+          <Megaphone size={16} className="text-yellow-700" />
+          <span className="text-xs md:text-sm font-medium">ประกาศ</span>
+        </div>
+
+        {/* กล่องข้อความเลื่อน */}
+        <div className="overflow-hidden w-full">
+          <div className="marquee-text text-[12px] sm:text-xs md:text-sm font-medium whitespace-nowrap">
+            🎉 พบกับสินค้าใหม่ๆ ทุกสัปดาห์ พร้อมโปรโมชั่นสุดพิเศษ! 🎉 พบกับสินค้าใหม่ๆ ทุกสัปดาห์ พร้อมโปรโมชั่นสุดพิเศษ! 🥦
+          </div>
         </div>
       </div>
 
+
+
       <ProductSearch products={products}/>
 
-
-      {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {products.map((product, index) => (
-          <ProductCard key={index} product={product} />
-        ))}
-      </div> */}
 
     </section>
   );

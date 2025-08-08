@@ -32,9 +32,11 @@ const DesktopUserMenu = async ({ user, itemCount }: DesktopUserMenuProps) => {
     },
     select: { 
       trackingNumber: true,
-      createdAt: true 
+      createdAt: true, 
+      paymentImage: true,
     }
   })
+
 
   return (
     <DropdownMenu>
@@ -54,18 +56,22 @@ const DesktopUserMenu = async ({ user, itemCount }: DesktopUserMenuProps) => {
           <span>{user.name || user.email}</span>
         </DropdownMenuLabel>
 
-      {user && order.length > 0 && (
-        <DropdownMenuLabel className="text-xs text-muted-foreground">
-          {order.filter((o) => isAfter(o.createdAt, subDays(new Date(), 3)))
-          .map((o,index) => (
-            <div key={index}>Tracking: {o.trackingNumber}</div>
-          ))}
-        </DropdownMenuLabel>
-      )}
+        {user && order.filter((o) => o.paymentImage).length > 0 && (
+          <DropdownMenuLabel className="text-xs text-muted-foreground">
+            {order
+              .filter(
+              (o) =>
+              isAfter(o.createdAt, subDays(new Date(), 3)) &&
+              o.paymentImage
+              )
+              .map((o, index) => (
+              <div key={index}>
+                Tracking: {o.trackingNumber}
+              </div>
+            ))}
+          </DropdownMenuLabel>
+        )}
 
-        {/* <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/profile">โปรไฟล์ของฉัน</Link>
-        </DropdownMenuItem> */}
 
         <DropdownMenuItem className="cursor-pointer" asChild>
           <Link href="/cart">
@@ -74,9 +80,6 @@ const DesktopUserMenu = async ({ user, itemCount }: DesktopUserMenuProps) => {
           </Link>
         </DropdownMenuItem> 
 
-        {/* <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/my-orders">ประวัติการสั่งซื้อ</Link>
-        </DropdownMenuItem> */}
 
         {user.role === "Admin" && (
           <>

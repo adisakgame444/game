@@ -7,19 +7,43 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
-
 const heroImage = [
   '/images/game-image.jpg',
   '/images/game-image.jpg',
   '/images/game-image.jpg'
 ]
 
+const heroImages = [
+  '/images/game-image.jpg',
+  '/images/game-image.jpg',
+  '/images/game-image.jpg'
+]
+
+
 export const Hero = () => {
   
   return (
     <div className="relative w-full overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-muted-foreground via-muted to-primary/80 opacity-25" />
-      <div className="container mx-auto relative px-4 py-16 md:py-24 lg:py-32">
+      <div className="absolute inset-0 z-0">
+        <Swiper
+          modules={[Autoplay]}
+          autoplay={{ delay: 3000, disableOnInteraction: false, reverseDirection: true  }}
+          loop
+        >
+          {heroImages.map((src, index) => (
+            <SwiperSlide key={index}>
+              <div
+                className="w-full h-screen bg-no-repeat bg-cover"
+                style={{ 
+                  backgroundImage: `url(${src})`, 
+                }}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper> 
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px] z-10" />
+      </div>
+      <div className="container mx-auto relative px-4 pt-4 pb-8 md:pt-12 md:pb-16 lg:pt-20 lg:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
           <div className="max-w-xl">
@@ -31,15 +55,18 @@ export const Hero = () => {
             </div>
 
             <div className="text-center space-y-4">
-              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900">
+              <h1 className="text-4xl md:text-5xl font-extrabold text-white/80">
                 ช็อปสินค้าสายเขียว
                 <br />
                 <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-lime-500 bg-clip-text text-transparent">
                   ราคาคุ้มค่า
                 </span>
               </h1>
-              <p className="text-sm font-medium md:text-lg text-gray-700">
-                มีบริการครบ พร้อมระบบฝากขายสินค้าของท่านอย่างมืออาชีพ
+              <p className="text-sm font-medium md:text-lg text-white/75">
+                มีบริการครบ 
+              </p>
+              <p className="text-sm font-medium md:text-sx text-white/75">
+                💚 พร้อมระบบฝากขายสินค้าของท่านอย่างมืออาชีพ 💚
               </p>
             </div>
 
@@ -59,7 +86,7 @@ export const Hero = () => {
                 className="group flex items-center justify-center gap-2 px-6 py-3 border border-green-600 text-green-700 hover:bg-green-50 rounded-full transition"
                 asChild
                 >
-               <Link href="/about">
+               <Link href="/contact">
                  <Info size={18} className="group-hover:scale-110 transition-transform" />
                   เกี่ยวกับเรา
                 </Link>
@@ -91,8 +118,8 @@ export const Hero = () => {
               <Swiper modules={[Autoplay]} autoplay={{ delay: 3500, disableOnInteraction: false}} loop className="w-full h-full">
                 {heroImage.map((src, i) => (
                   <SwiperSlide key={i}>
-                    <div className=" relative w-full h-full">
-                      <Image src={src} alt={`Hero image ${i}`} fill className=" object-cover" priority={ i === 0 }/>
+                    <div className="relative w-full h-full z-10 mx-auto box-slide-left-sync">
+                      <Image src={src} alt={`Hero image ${i}`} fill className="rounded-lg shadow-lg object-cover" priority={ i === 0 }/>
                     </div>
                   </SwiperSlide>
                 ))}

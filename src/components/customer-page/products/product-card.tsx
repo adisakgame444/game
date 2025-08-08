@@ -37,7 +37,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   }
 
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-md">
+    <Card className="m-0 p-0 group overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-md h-full">
       <Link href={`/products/${product.id}`}>
         <div className="relative pt-[100%] overflow-hidden bg-muted-foreground">
           {discount > 0 && (
@@ -46,7 +46,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </Badge>
           )}
 
-          <div className="absolute inset-0 size-full transition-transform duration-500 group-hover:scale-105">
+          <div className="absolute  inset-0 size-full transition-transform duration-500 group-hover:scale-105">
             <Image
               alt={product.title}
               src={product.mainImage?.url || "/images/no-product-image.webp"}
@@ -57,7 +57,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
           {product.stock <= 0 && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
-              <Badge variant="destructive" className="text=-sm px-3 py-1">
+              <Badge variant="destructive" className="text-sm px-3 py-1">
                 สินค้าหมด
               </Badge>
             </div>
@@ -65,7 +65,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
 
-      <div className="text-right pt-2 px-2">
+      <div className="flex justify-between items-center px-2 pt-2">
+          <span className="inline-block bg-green-100 text-green-800 text-xs md:text-sm lg:text-base font-medium px-2 py-1 rounded-sm">
+           {typeof product.category === "string"
+             ? product.category
+            : product.category?.name || "ไม่มีหมวดหมู่"}
+          </span>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='ghost' size='icon' className=" size-10">
@@ -76,27 +82,27 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => handleDetailClick(product)}>
                 <Eye size={15}/>
-                <span>View</span>
+                <span>ดูลายระเอียดสินค้า</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
       </div>
 
-      <CardContent className="p-4">
+      <CardContent className="p-2 flex-grow">
         <div className="space-y-2">
           <Link href={`/products/${product.id}`}>
-            <h3 className="font-medium line-clamp-2 min-h-[18px] group-hover:text-primary transition-colors duration-200">
+            <h3 className="text-[13px] md:text-[15px] lg:text-[17px] font-medium line-clamp-2 min-h-[25px] leading-snug">
               {product.title}
             </h3>
           </Link>
 
           <div className="flex justify-between items-baseline">
             <div className="flex flex-col">
-              <span className="font-medium text-lg">
+              <span className="font-semibold text-base md:text-lg lg:text-xl">
                 {formatPrice(product.price)}
               </span>
               {product.basePrice > product.price && (
-                <span className="text-sm line-through text-muted-foreground">
+                <span className="text-sm md:text-base lg:text-lg font-medium line-through text-muted-foreground leading-tights">
                   {formatPrice(product.basePrice)}
                 </span>
               )}
@@ -106,7 +112,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               <Badge
                 variant="outline"
                 className={cn(
-                  "transition-colors",
+                  "transition-colors text-xs md:text-sm lg:text-base px-2 py-0.5",
                   product.stock <= product.lowStock
                     ? "text-amber-500 border-amber-500"
                     : "text-green-600 border-green-500",
@@ -117,7 +123,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             ) : (
               <Badge
                 variant="outline"
-                className="text-destructive border-destructive"
+                className="text-destructive border-destructive text-xs px-2 py-0.5"
               >
                 สินค้าหมด
               </Badge>
@@ -126,7 +132,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </CardContent>
 
-      <CardFooter className="p-3 gap-2">
+      <CardFooter className="p-1 gap-2">
         <AddToCartButton
           productId={product.id}
           stock={product.stock}

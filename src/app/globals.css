@@ -22,10 +22,10 @@
 }
 
 .marquee-container {
-  overflow: hidden;
-  white-space: nowrap;
+  /* overflow: hidden; */
+  white-space: 100%;
   width: 100%;
-  padding: 10px 0;
+  padding: 8px 0;
   box-sizing: border-box;
 }
 
@@ -36,12 +36,29 @@
   animation: marquee-scroll 15s linear infinite;
 }
 
+
+
 @keyframes marquee-scroll {
-  0%   { transform: translateX(0%); }
+  0%   { transform: translateX(40%); }
   100% { transform: translateX(-100%); }
 }
+@keyframes slideRightOnce {
+  0% {
+    background-position: left center;
+  }
+  100% {
+    background-position: right center;
+  }
+}
 
+.bg-slide-right-once {
+  animation: slideRightOnce 3s ease-in-out forwards; /* <- สำคัญ */
+}
 
+.sheet-footer {
+  margin-top: 0 !important;
+  align-self: flex-start !important; /* กันไม่ให้ติดขอบล่าง */
+}
 
 :root {
   --radius: 0.65rem;
