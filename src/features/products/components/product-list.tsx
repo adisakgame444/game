@@ -65,7 +65,7 @@ const ProductList = ({
   const [isRestoreModal, setIsRestoreModal] = useState(false);
   const [isDetailModal, setIsDetailModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(
-    null,
+    null
   );
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const ProductList = ({
 
     if (searchTerm) {
       result = result.filter((p) =>
-        p.title.toLowerCase().includes(searchTerm.toLowerCase()),
+        p.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -131,38 +131,81 @@ const ProductList = ({
           </div>
 
           <Tabs value={activeTab} onValueChange={hadleTabChange}>
-            <TabsList className="grid grid-cols-4 mb-4">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="active">Active</TabsTrigger>
-              <TabsTrigger value="inactive">Inactive</TabsTrigger>
-              <TabsTrigger value="low-stock">Low Stock</TabsTrigger>
+            <TabsList className="grid grid-cols-4 mb-4 gap-0.5 sm:gap-0">
+              <TabsTrigger
+                value="all"
+                className="px-1 py-1 text-[10px] sm:px-3 sm:py-2 sm:text-sm leading-tight"
+              >
+                All
+              </TabsTrigger>
+              <TabsTrigger
+                value="active"
+                className="px-1 py-1 text-[10px] sm:px-3 sm:py-2 sm:text-sm leading-tight"
+              >
+                Active
+              </TabsTrigger>
+              <TabsTrigger
+                value="inactive"
+                className="px-1 py-1 text-[10px] sm:px-3 sm:py-2 sm:text-sm leading-tight"
+              >
+                Inactive
+              </TabsTrigger>
+              <TabsTrigger
+                value="low-stock"
+                className="px-1 py-1 text-[10px] sm:px-3 sm:py-2 sm:text-sm leading-tight"
+              >
+                Low Stock
+              </TabsTrigger>
             </TabsList>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-4">
-              <div className="flex gap-2">
-                <Badge variant="outline" className="sm:px-3 py-1">
+            <div className="flex flex-col px-2  sm:px-0 sm:flex-row gap-4 justify-between items-center mb-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full">
+                <Badge
+                  variant="outline"
+                  className="flex items-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap"
+                >
                   <span className="font-semibold text-blue-600">
                     {products.length}
                   </span>
-                  Total
+                  <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    Total
+                  </span>
                 </Badge>
-                <Badge variant="outline" className="sm:px-3 py-1">
+
+                <Badge
+                  variant="outline"
+                  className="flex items-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap"
+                >
                   <span className="font-semibold text-green-600">
                     {products.filter((p) => p.status === "Active").length}
                   </span>
-                  Active
+                  <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    Active
+                  </span>
                 </Badge>
-                <Badge variant="outline" className="sm:px-3 py-1">
+
+                <Badge
+                  variant="outline"
+                  className="flex items-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap"
+                >
                   <span className="font-semibold text-gray-500">
                     {products.filter((p) => p.status === "Inactive").length}
                   </span>
-                  Inactive
+                  <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    Inactive
+                  </span>
                 </Badge>
-                <Badge variant="outline" className="sm:px-3 py-1">
+
+                <Badge
+                  variant="outline"
+                  className="flex items-center gap-1 overflow-hidden text-ellipsis whitespace-nowrap"
+                >
                   <span className="font-semibold text-amber-600">
                     {products.filter((p) => p.stock <= p.lowStock).length}
                   </span>
-                  Low Stock
+                  <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    Low stock
+                  </span>
                 </Badge>
               </div>
 

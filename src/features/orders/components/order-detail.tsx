@@ -16,7 +16,7 @@ import { formatPrice } from "@/lib/formatPrice";
 import { generatePromptPayQR } from "@/lib/generatePromptPayQR";
 import { getStatusColor, getStatusText } from "@/lib/utils";
 import { OrderType } from "@/types/order";
-import { Ban, CreditCard, Upload } from "lucide-react";
+import { Ban, CreditCard, Download, Upload } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -135,13 +135,10 @@ const OrderDetail = ({ order }: OrderDetailProps) => {
                 <div>
                   <h3 className="font-medium mb-1">หมายเลขพัสดุ:</h3>
                   <p className="text-medium text-primary">
-                   {order.trackingNumber}
+                    {order.trackingNumber}
                   </p>
                 </div>
               )}
-
-
-
             </div>
           </CardContent>
         </Card>
@@ -189,6 +186,14 @@ const OrderDetail = ({ order }: OrderDetailProps) => {
                           width={200}
                           height={200}
                         />
+                        <a
+                          href={qrCodeURL}
+                          download="promptpay_qrcode.png"
+                          className="flex items-center justify-center gap-2 px-3 py-1.5 text-sm  border rounded-full bg-green-100 hover:bg-green-200"
+                        >
+                          <Download size={16} />
+                          บึนทึกรูปภาพ QR CODE
+                        </a>
                       </div>
                     </div>
                   ) : (
